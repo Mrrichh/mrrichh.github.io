@@ -1,156 +1,313 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Richmond Osei Gyasi - Frontend Software Developer portfolio. Clean websites, modern UI, and digital solutions." />
-  <meta name="author" content="Richmond Osei Gyasi" />
-  <meta property="og:title" content="Richmond Osei Gyasi | Frontend Software Developer" />
-  <meta property="og:description" content="Professional portfolio of Richmond Osei Gyasi, a frontend software developer building clean websites, modern interfaces, and practical digital solutions." />
-  <meta property="og:type" content="website" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Richmond Osei Gyasi | Frontend Software Developer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-  <link rel="stylesheet" href="assets/styles.css" />
+  <meta name="description" content="Professional portfolio of Richmond Osei Gyasi, a Ghanaian frontend software developer." />
+  <meta name="theme-color" content="#07111f" />
+  <style>
+    :root{
+      --bg:#06101d; --bg2:#09172a; --card:rgba(255,255,255,.08);
+      --text:#f7fbff; --muted:#a7b3c7; --line:rgba(255,255,255,.14);
+      --cyan:#25e0c1; --blue:#5aa7ff; --gold:#ffd166;
+      --radius:28px; --max:1120px; --shadow:0 28px 80px rgba(0,0,0,.35);
+      --font:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; min-height:100vh; font-family:var(--font); color:var(--text);
+      background:
+        radial-gradient(circle at 12% 5%, rgba(37,224,193,.24), transparent 28rem),
+        radial-gradient(circle at 85% 10%, rgba(90,167,255,.18), transparent 30rem),
+        linear-gradient(135deg,#040914,var(--bg) 45%,#07172b);
+      overflow-x:hidden;
+    }
+    body:before{
+      content:""; position:fixed; inset:0; pointer-events:none; opacity:.28;
+      background-image:linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+                       linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size:52px 52px;
+      mask-image:linear-gradient(to bottom,#000,transparent 70%);
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(var(--max),calc(100% - 32px)); margin:0 auto}
+    header{
+      position:sticky; top:0; z-index:20; border-bottom:1px solid var(--line);
+      background:rgba(6,16,29,.78); backdrop-filter:blur(18px);
+    }
+    .nav{min-height:78px; display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:950; letter-spacing:-.03em}
+    .logo{
+      width:46px; height:46px; border-radius:16px; display:grid; place-items:center;
+      background:linear-gradient(135deg,var(--cyan),var(--blue)); color:#04101d;
+      box-shadow:0 18px 42px rgba(37,224,193,.22);
+    }
+    .links{display:flex; gap:7px; align-items:center}
+    .links button{
+      border:1px solid transparent; background:transparent; color:var(--muted);
+      padding:11px 14px; border-radius:999px; font-weight:850; cursor:pointer; font:inherit;
+    }
+    .links button:hover,.links button.active{background:rgba(255,255,255,.08); color:var(--text); border-color:var(--line)}
+    .menu{display:none}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px; border:1px solid var(--line);
+      padding:13px 18px; border-radius:999px; background:rgba(255,255,255,.07);
+      color:var(--text); font-weight:900; cursor:pointer; transition:.22s ease; font:inherit;
+    }
+    .btn:hover{transform:translateY(-2px); border-color:rgba(37,224,193,.7)}
+    .btn.primary{border:0; color:#06101d; background:linear-gradient(135deg,var(--cyan),var(--blue))}
+    main{padding:44px 0 70px}
+    .page{display:none; animation:fade .35s ease}
+    .page.active{display:block}
+    @keyframes fade{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:none}}
+    .hero{display:grid; grid-template-columns:1.1fr .9fr; gap:28px; align-items:center; min-height:calc(100vh - 170px)}
+    .kicker{color:var(--cyan); font-weight:950; text-transform:uppercase; letter-spacing:.16em; font-size:.78rem; margin:0 0 12px}
+    h1,h2,h3,p{margin-top:0}
+    h1{font-size:clamp(3rem,8vw,6.5rem); line-height:.92; letter-spacing:-.075em; margin-bottom:24px}
+    h2{font-size:clamp(2.2rem,5.5vw,4.5rem); line-height:1; letter-spacing:-.065em; margin-bottom:18px}
+    h3{font-size:1.35rem; letter-spacing:-.035em; margin-bottom:10px}
+    .gradient{background:linear-gradient(135deg,#fff 25%,#c7ecff 50%,var(--cyan),var(--blue)); -webkit-background-clip:text; color:transparent}
+    .lead{font-size:clamp(1.05rem,2vw,1.3rem); line-height:1.75; color:#d7e0ee; max-width:720px}
+    .actions,.socials,.chips{display:flex; flex-wrap:wrap; gap:12px; margin-top:24px}
+    .socials a{
+      width:45px; height:45px; display:grid; place-items:center; border-radius:16px;
+      background:rgba(255,255,255,.08); border:1px solid var(--line); font-weight:950;
+    }
+    .visual,.panel,.card,.project{
+      border:1px solid var(--line); border-radius:var(--radius);
+      background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.035));
+      box-shadow:var(--shadow); overflow:hidden;
+    }
+    .visual{padding:28px; position:relative}
+    .visual:before{
+      content:""; position:absolute; inset:-2px; z-index:-1;
+      background:radial-gradient(circle at 35% 12%,rgba(37,224,193,.25),transparent 17rem),
+                 radial-gradient(circle at 80% 70%,rgba(90,167,255,.22),transparent 18rem);
+    }
+    .orb{
+      width:145px; height:145px; border-radius:42px; display:grid; place-items:center;
+      background:linear-gradient(135deg,var(--cyan),var(--blue)); color:#04101d;
+      font-size:4rem; font-weight:950; transform:rotate(-5deg); margin-bottom:24px;
+    }
+    .chip{border:1px solid var(--line); border-radius:999px; padding:9px 12px; color:#dce6f5; background:rgba(255,255,255,.06); font-weight:750}
+    .metrics{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:24px}
+    .metric{padding:18px; border:1px solid var(--line); border-radius:22px; background:rgba(0,0,0,.15)}
+    .metric strong{display:block; font-size:2rem}
+    .metric span{color:var(--muted); font-weight:750}
+    .top{padding:34px 0 18px}
+    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+    .grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:18px}
+    .split{display:grid; grid-template-columns:.9fr 1.1fr; gap:20px}
+    .card,.panel{padding:24px}
+    .icon{
+      width:50px; height:50px; border-radius:18px; display:grid; place-items:center;
+      background:rgba(37,224,193,.12); color:var(--cyan); font-weight:950; margin-bottom:16px;
+    }
+    .muted{color:var(--muted); line-height:1.75}
+    .timeline{display:grid; gap:16px}
+    .step{padding-left:24px; border-left:2px solid rgba(37,224,193,.28); position:relative}
+    .step:before{content:""; position:absolute; left:-7px; top:4px; width:12px; height:12px; border-radius:50%; background:var(--cyan)}
+    .bar{height:10px; border-radius:99px; background:rgba(255,255,255,.10); overflow:hidden; margin-top:8px}
+    .bar span{display:block; height:100%; width:var(--w); border-radius:inherit; background:linear-gradient(90deg,var(--cyan),var(--blue))}
+    .skill{margin:16px 0}.skill div:first-child{display:flex; justify-content:space-between; font-weight:850}
+    .project-art{min-height:190px; background:linear-gradient(135deg,rgba(37,224,193,.32),rgba(90,167,255,.18)); display:flex; align-items:end; padding:22px}
+    .badge{padding:9px 13px; border-radius:999px; background:rgba(6,16,29,.7); border:1px solid var(--line); font-weight:950}
+    .project-body{padding:24px}
+    .contact-row{display:flex; gap:14px; align-items:flex-start; border:1px solid var(--line); border-radius:20px; padding:16px; margin-bottom:12px; background:rgba(255,255,255,.055)}
+    .mini{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;background:rgba(37,224,193,.13);color:var(--cyan);font-weight:950;flex:none}
+    input,textarea{
+      width:100%; margin-bottom:12px; border:1px solid var(--line); border-radius:18px; padding:15px 16px;
+      background:rgba(255,255,255,.07); color:var(--text); font:inherit; outline:none;
+    }
+    textarea{min-height:150px; resize:vertical}
+    input:focus,textarea:focus{border-color:rgba(37,224,193,.7); box-shadow:0 0 0 4px rgba(37,224,193,.08)}
+    footer{border-top:1px solid var(--line); padding:28px 0; color:var(--muted)}
+    .footer-inner{display:flex; justify-content:space-between; gap:18px; align-items:center; flex-wrap:wrap}
+    @media(max-width:850px){
+      .hero,.split{grid-template-columns:1fr}
+      .grid3,.grid2{grid-template-columns:1fr}
+      .hero{min-height:auto}
+      .links{display:none; position:absolute; top:78px; left:16px; right:16px; padding:12px; border:1px solid var(--line); border-radius:22px; background:rgba(6,16,29,.96); box-shadow:var(--shadow); flex-direction:column; align-items:stretch}
+      .links.open{display:flex}
+      .menu{display:inline-flex}
+      .nav .btn.primary{display:none}
+      .links button{text-align:left}
+      .orb{width:112px;height:112px;font-size:3rem;border-radius:32px}
+      .metrics{grid-template-columns:1fr}
+    }
+  </style>
 </head>
 <body>
-  <div class="page-glow glow-one"></div>
-  <div class="page-glow glow-two"></div>
-
-  <header class="site-header" id="top">
-    <nav class="nav container" aria-label="Main navigation">
-      <a class="brand" href="#top" aria-label="Richmond Osei Gyasi home">
-        <span class="brand-mark">RG</span>
-        <span class="brand-text">Richmond</span>
-      </a>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </nav>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" data-link="home"><span class="logo">RG</span><span>Richmond</span></a>
+      <nav class="links" id="links" aria-label="Portfolio pages">
+        <button data-link="home">Home</button>
+        <button data-link="about">About</button>
+        <button data-link="skills">Skills</button>
+        <button data-link="projects">Projects</button>
+        <button data-link="contact">Contact</button>
+      </nav>
+      <button class="btn primary" data-link="contact">Hire / Contact</button>
+      <button class="btn menu" id="menu">Menu</button>
+    </div>
   </header>
 
-  <main>
-    <section class="hero section">
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <p class="eyebrow">Frontend Software Developer</p>
-          <h1>Richmond Osei Gyasi</h1>
-          <p class="hero-text">I build clean, responsive websites and modern user interfaces that help brands, students, and businesses present themselves professionally online.</p>
-          <div class="hero-actions">
-            <a href="#projects" class="btn btn-primary">View Projects</a>
-            <a href="mailto:richie0987612345@gmail.com" class="btn btn-ghost">Hire / Contact Me</a>
-          </div>
-          <div class="socials" aria-label="Social media links">
-            <a href="https://github.com/mrrichh" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-            <a href="https://www.instagram.com/Mrrichh_77" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.snapchat.com/add/Mrrichh_77" target="_blank" rel="noopener" aria-label="Snapchat"><i class="fa-brands fa-snapchat"></i></a>
-            <a href="https://wa.me/233202049506" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-          </div>
+  <main class="container">
+    <section class="page hero" id="home">
+      <div>
+        <p class="kicker">Frontend Software Developer</p>
+        <h1>Richmond <span class="gradient">Osei Gyasi</span></h1>
+        <p class="lead">I design and build clean, responsive websites and modern user interfaces that help brands, students, and businesses present themselves professionally online.</p>
+        <div class="actions">
+          <button class="btn primary" data-link="projects">View Projects</button>
+          <button class="btn" data-link="contact">Hire / Contact Me</button>
         </div>
-        <div class="hero-card reveal delay">
-          <div class="profile-card">
-            <div class="profile-avatar">RG</div>
-            <h2>Clean UI. Fast delivery. Real results.</h2>
-            <p>Portfolio • Business websites • UI redesigns • Frontend projects</p>
-            <div class="card-lines"><span></span><span></span><span></span></div>
-          </div>
+        <div class="socials">
+          <a href="https://github.com/mrrichh" target="_blank" rel="noreferrer">GH</a>
+          <a href="https://instagram.com/Mrrichh_77" target="_blank" rel="noreferrer">IG</a>
+          <a href="https://www.snapchat.com/add/Mrrichh_77" target="_blank" rel="noreferrer">SC</a>
+          <a href="https://wa.me/233202049506" target="_blank" rel="noreferrer">WA</a>
+        </div>
+      </div>
+      <aside class="visual">
+        <div class="orb">RG</div>
+        <h2>Clean UI. Fast delivery. Real results.</h2>
+        <p class="muted">Portfolio websites • Business websites • UI redesigns • Frontend projects • Student tech solutions</p>
+        <div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Responsive Design</span></div>
+        <div class="metrics">
+          <div class="metric"><strong>5+</strong><span>Project areas</span></div>
+          <div class="metric"><strong>100%</strong><span>Mobile-ready</span></div>
+          <div class="metric"><strong>GH</strong><span>Based in Ghana</span></div>
+          <div class="metric"><strong>RG</strong><span>Professional brand</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="page" id="about">
+      <div class="top">
+        <p class="kicker">About me</p>
+        <h2>I create digital experiences that feel simple and professional.</h2>
+        <p class="lead">I am a Ghanaian frontend developer focused on building responsive websites, clean layouts, and practical user interfaces. I enjoy turning ideas into polished web pages that are easy to use and visually strong.</p>
+      </div>
+      <div class="split">
+        <div class="panel">
+          <h3>Profile</h3>
+          <p class="muted">Name: Richmond Osei Gyasi</p>
+          <p class="muted">Role: Frontend Software Developer</p>
+          <p class="muted">Location: Ghana</p>
+          <p class="muted">Email: richie0987612345@gmail.com</p>
+          <div class="chips"><span class="chip">Creative</span><span class="chip">Detail-focused</span><span class="chip">Problem solver</span></div>
+        </div>
+        <div class="timeline">
+          <div class="step"><h3>Frontend development</h3><p class="muted">I build clean pages with HTML, CSS, JavaScript, responsive layouts, and modern UI principles.</p></div>
+          <div class="step"><h3>Education technology</h3><p class="muted">I work around student-focused digital solutions, school projects, tutor platforms, and interface ideas.</p></div>
+          <div class="step"><h3>Real-world tech</h3><p class="muted">I am interested in technology that solves practical problems in education, agriculture, business, and personal branding.</p></div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="about">
-      <div class="container two-col">
-        <div class="section-heading reveal">
-          <p class="eyebrow">About Me</p>
-          <h2>I create digital experiences that feel simple and professional.</h2>
+    <section class="page" id="skills">
+      <div class="top">
+        <p class="kicker">Skills</p>
+        <h2>Tools and abilities I use to build better web experiences.</h2>
+        <p class="lead">My skill set focuses on frontend development, responsive design, user interface structure, and practical software project work.</p>
+      </div>
+      <div class="grid2">
+        <div class="panel">
+          <h3>Frontend core</h3>
+          <div class="skill"><div><span>HTML Structure</span><span>95%</span></div><div class="bar"><span style="--w:95%"></span></div></div>
+          <div class="skill"><div><span>CSS Styling</span><span>92%</span></div><div class="bar"><span style="--w:92%"></span></div></div>
+          <div class="skill"><div><span>JavaScript</span><span>78%</span></div><div class="bar"><span style="--w:78%"></span></div></div>
         </div>
-        <div class="content reveal">
-          <p>I am a Ghanaian frontend developer focused on building responsive websites, clean layouts, and practical user interfaces. I enjoy turning ideas into polished web pages that are easy to use and visually strong.</p>
-          <div class="quick-info">
-            <div><i class="fa-solid fa-location-dot"></i><span>Ghana</span></div>
-            <div><i class="fa-solid fa-envelope"></i><span>richie0987612345@gmail.com</span></div>
-            <div><i class="fa-solid fa-at"></i><span>@Mrrichh_77</span></div>
-            <div><i class="fa-brands fa-whatsapp"></i><span>wa.me/233202049506</span></div>
-          </div>
+        <div class="panel">
+          <h3>Design & tools</h3>
+          <div class="skill"><div><span>Responsive Design</span><span>93%</span></div><div class="bar"><span style="--w:93%"></span></div></div>
+          <div class="skill"><div><span>UI Layouts</span><span>88%</span></div><div class="bar"><span style="--w:88%"></span></div></div>
+          <div class="chips"><span class="chip">GitHub</span><span class="chip">VS Code</span><span class="chip">Figma basics</span><span class="chip">Java</span><span class="chip">MySQL</span></div>
         </div>
       </div>
     </section>
 
-    <section class="section alt" id="skills">
-      <div class="container">
-        <div class="section-heading center reveal">
-          <p class="eyebrow">Skills</p>
-          <h2>Tools I use to build polished websites</h2>
-        </div>
-        <div class="skills-grid">
-          <article class="skill-card reveal"><i class="fa-brands fa-html5"></i><h3>HTML</h3><p>Clean page structure and semantic layouts.</p></article>
-          <article class="skill-card reveal"><i class="fa-brands fa-css3-alt"></i><h3>CSS</h3><p>Responsive designs, animations, and modern visual styling.</p></article>
-          <article class="skill-card reveal"><i class="fa-brands fa-js"></i><h3>JavaScript</h3><p>Interactive website behavior and smooth user experiences.</p></article>
-          <article class="skill-card reveal"><i class="fa-solid fa-mobile-screen"></i><h3>Responsive UI</h3><p>Websites that look good on phone, tablet, and desktop.</p></article>
-        </div>
+    <section class="page" id="projects">
+      <div class="top">
+        <p class="kicker">Selected work</p>
+        <h2>Projects that show design thinking and real-world problem solving.</h2>
+        <p class="lead">These highlights present my interest in frontend development, education technology, user experience, and practical digital solutions.</p>
+      </div>
+      <div class="grid2">
+        <article class="project"><div class="project-art"><span class="badge">Project 01</span></div><div class="project-body"><h3>EduLink GH</h3><p class="muted">Tutor-learning platform concept with student, tutor, and admin workflows, authentication, sessions, payments, ratings, and documentation.</p><div class="chips"><span class="chip">Java</span><span class="chip">JavaFX</span><span class="chip">Spring Boot</span><span class="chip">MySQL</span></div></div></article>
+        <article class="project"><div class="project-art"><span class="badge">Project 02</span></div><div class="project-body"><h3>Agritech / Fish Farming Dashboard</h3><p class="muted">A practical agritech idea focused on helping small-scale fish farmers monitor data and make better farming decisions.</p><div class="chips"><span class="chip">Dashboard</span><span class="chip">Agriculture</span><span class="chip">UI</span></div></div></article>
+        <article class="project"><div class="project-art"><span class="badge">Project 03</span></div><div class="project-body"><h3>Bolt GPS HCI Redesign</h3><p class="muted">A human-computer interaction project focused on improving pickup-location usability for students using ride-hailing services.</p><div class="chips"><span class="chip">HCI</span><span class="chip">UX</span><span class="chip">Prototype</span></div></div></article>
+        <article class="project"><div class="project-art"><span class="badge">Project 04</span></div><div class="project-body"><h3>Professional Portfolio Website</h3><p class="muted">A personal brand website with page switching, responsive layout, modern styling, project sections, and clear contact options.</p><div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div></div></article>
       </div>
     </section>
 
-    <section class="section" id="projects">
-      <div class="container">
-        <div class="section-heading center reveal">
-          <p class="eyebrow">Selected Work</p>
-          <h2>Projects and ideas I can present professionally</h2>
-        </div>
-        <div class="project-grid">
-          <article class="project-card reveal">
-            <div class="project-top"><span>01</span><i class="fa-solid fa-globe"></i></div>
-            <h3>Personal Portfolio Website</h3>
-            <p>A clean portfolio site for showing skills, contact links, and selected projects in one professional place.</p>
-            <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
-          </article>
-          <article class="project-card reveal">
-            <div class="project-top"><span>02</span><i class="fa-solid fa-graduation-cap"></i></div>
-            <h3>EduLink GH Concept</h3>
-            <p>A student-focused digital system concept for improving education access and school communication.</p>
-            <div class="tags"><span>UI Design</span><span>Java</span><span>Frontend</span></div>
-          </article>
-          <article class="project-card reveal">
-            <div class="project-top"><span>03</span><i class="fa-solid fa-seedling"></i></div>
-            <h3>AgriTech Idea</h3>
-            <p>A practical technology idea for supporting small-scale farmers with better monitoring and decision-making.</p>
-            <div class="tags"><span>Innovation</span><span>Research</span><span>Tech</span></div>
-          </article>
-        </div>
+    <section class="page" id="contact">
+      <div class="top">
+        <p class="kicker">Contact</p>
+        <h2>Let’s build something clean.</h2>
+        <p class="lead">Need a portfolio, business website, school project interface, or frontend page? Reach me through email, WhatsApp, Instagram, or Snapchat.</p>
       </div>
-    </section>
-
-    <section class="section contact-section" id="contact">
-      <div class="container contact-card reveal">
-        <div>
-          <p class="eyebrow">Contact</p>
-          <h2>Let us build something clean.</h2>
-          <p>Reach out for websites, UI improvements, portfolio pages, and clean digital designs.</p>
+      <div class="split">
+        <div class="panel">
+          <a class="contact-row" href="mailto:richie0987612345@gmail.com"><span class="mini">@</span><span><strong>Email</strong><br><span class="muted">richie0987612345@gmail.com</span></span></a>
+          <a class="contact-row" href="https://wa.me/233202049506" target="_blank" rel="noreferrer"><span class="mini">WA</span><span><strong>WhatsApp</strong><br><span class="muted">wa.me/233202049506</span></span></a>
+          <a class="contact-row" href="https://instagram.com/Mrrichh_77" target="_blank" rel="noreferrer"><span class="mini">IG</span><span><strong>Instagram</strong><br><span class="muted">@Mrrichh_77</span></span></a>
+          <a class="contact-row" href="https://www.snapchat.com/add/Mrrichh_77" target="_blank" rel="noreferrer"><span class="mini">SC</span><span><strong>Snapchat</strong><br><span class="muted">@Mrrichh_77</span></span></a>
         </div>
-        <div class="contact-actions">
-          <a class="btn btn-primary" href="mailto:richie0987612345@gmail.com">Email Me</a>
-          <a class="btn btn-ghost" href="https://wa.me/233202049506" target="_blank" rel="noopener">WhatsApp</a>
-          <a class="btn btn-ghost" href="https://github.com/mrrichh" target="_blank" rel="noopener">GitHub</a>
-        </div>
+        <form class="panel" id="form">
+          <h3>Send a quick message</h3>
+          <p class="muted">This opens your email app with the message ready to send.</p>
+          <input name="name" placeholder="Your name" required>
+          <input name="email" type="email" placeholder="Your email" required>
+          <textarea name="message" placeholder="Tell me what you want to build..." required></textarea>
+          <button class="btn primary" type="submit">Create Email Message</button>
+        </form>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
+  <footer>
     <div class="container footer-inner">
-      <p>© 2026 Richmond Osei Gyasi. All rights reserved.</p>
-      <a href="#top">Back to top</a>
+      <p>© 2026 Richmond Osei Gyasi. Professional frontend portfolio.</p>
+      <p>Website: https://mrrichh.github.io/</p>
     </div>
   </footer>
 
-  <script src="assets/script.js"></script>
+  <script>
+    const pages=[...document.querySelectorAll(".page")];
+    const links=[...document.querySelectorAll("[data-link]")];
+    const menu=document.querySelector("#menu");
+    const nav=document.querySelector("#links");
+
+    function show(page){
+      page = page || "home";
+      pages.forEach(p=>p.classList.toggle("active",p.id===page));
+      links.forEach(l=>l.classList.toggle("active",l.dataset.link===page));
+      history.replaceState(null,"","#"+page);
+      nav.classList.remove("open");
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+
+    links.forEach(link=>link.addEventListener("click",e=>{
+      e.preventDefault();
+      show(link.dataset.link);
+    }));
+
+    menu.addEventListener("click",()=>nav.classList.toggle("open"));
+
+    document.querySelector("#form").addEventListener("submit",e=>{
+      e.preventDefault();
+      const f=e.target;
+      const subject=encodeURIComponent("Portfolio inquiry from "+f.name.value.trim());
+      const body=encodeURIComponent(`Name: ${f.name.value.trim()}\nEmail: ${f.email.value.trim()}\n\n${f.message.value.trim()}`);
+      location.href=`mailto:richie0987612345@gmail.com?subject=${subject}&body=${body}`;
+    });
+
+    show((location.hash||"#home").replace("#",""));
+  </script>
 </body>
 </html>
